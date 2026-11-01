@@ -1,0 +1,99 @@
+{% comment %}
+  Official SJ Collections Luxury Footer
+{% endcomment %}
+
+<footer class="site-footer">
+  <div class="page-container">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 3rem; margin-bottom: 3.5rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem;">
+        
+        <!-- Column 1: Brand Story -->
+        <div>
+          <a href="/" style="display: inline-block; margin-bottom: 1.25rem;">
+            <img
+              src="{{ 'sj-logo.svg' | asset_url }}"
+              alt="SJ Collections"
+              style="height: 38px; width: auto; filter: invert(1) brightness(2);"
+              width="150"
+              height="38"
+            >
+          </a>
+          <p style="font-size: 0.8125rem; line-height: 1.7; color: #8A8882; max-width: 300px;">
+            {{ section.settings.bio | default: "An atelier rooted in restrained luxury, meticulous Pakistani tailoring, and artisanal leathercraft. Designed for discerning patrons who demand timeless refinement." }}
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; color: #D8D4CC;">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 9999px; background-color: #25D366;"></span>
+            <span>Atelier Concierge: {{ settings.whatsapp_label | default: '+92 333 3368420' }}</span>
+          </div>
+        </div>
+
+        <!-- Column 2: Signature Collections -->
+        <div>
+          <h4 style="font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 1.25rem;">
+            Creations &amp; Catalog
+          </h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.8125rem;">
+            <li><a href="/collections/all">Complete Atelier Catalog</a></li>
+            <li><a href="/collections/wallets">Dedicated Leather Wallets</a></li>
+            <li><a href="/collections/footwear">Handcrafted Leather Footwear</a></li>
+            <li><a href="/collections/men">Men's Tailored Waistcoats</a></li>
+            <li><a href="/collections/women">Women's Pret &amp; Couture</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Client Services -->
+        <div>
+          <h4 style="font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 1.25rem;">
+            Patron Services
+          </h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.8125rem;">
+            <li><a href="/cart">Shopping Bag &amp; COD Checkout</a></li>
+            <li><a href="/pages/shipping-policy">White-Glove Delivery in Pakistan</a></li>
+            <li><a href="/pages/returns-policy">Exchanges &amp; Atelier Guarantee</a></li>
+            <li><a href="/pages/faq">Frequently Answered Inquiries</a></li>
+            <li><a href="/pages/contact">Concierge &amp; Bespoke Inquiries</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Payment & Delivery Notice -->
+        <div>
+          <h4 style="font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 1.25rem;">
+            Payment &amp; Transit
+          </h4>
+          <div style="background-color: #1F1F1D; border: 1px solid #33322E; padding: 1.25rem; font-size: 0.75rem; line-height: 1.6; color: #A3A199;">
+            <p style="font-weight: 600; color: #FFFFFF; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.08em;">
+              Cash on Delivery (COD) Only
+            </p>
+            <p>
+              Inspect and pay in cash upon courier arrival anywhere in Pakistan. Orders are verified directly through WhatsApp for discreet personalized confirmation.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div style="padding-top: 2rem; border-top: 1px solid #262522; display: flex; flex-direction: column; sm:flex-row; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.6875rem; color: #73716B;">
+      <p>&copy; {{ 'now' | date: '%Y' }} SJ Collections. All Rights Reserved. Crafted for Pakistan's Connoisseurs.</p>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="/pages/privacy-policy">Privacy Policy</a>
+        <a href="/pages/terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "bio",
+      "label": "Brand Editorial Bio",
+      "default": "An atelier rooted in restrained luxury, meticulous Pakistani tailoring, and artisanal leathercraft. Designed for discerning patrons who demand timeless refinement."
+    }
+  ]
+}
+{% endschema %}

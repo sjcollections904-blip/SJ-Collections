@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "banner": {
+      "type": "image-banner",
+      "settings": {
+        "banner_height": 75,
+        "image_overlay_opacity": 65,
+        "tagline": "MAISON DE COUTURE · PAKISTAN",
+        "heading": "Timeless Elegance, Bespoke Restraint",
+        "text": "Discover refined tailored silhouettes, full-grain leather wallets, and handcrafted footwear designed for discerning lifestyles across Pakistan.",
+        "button_label_1": "EXPLORE ALL CREATIONS",
+        "button_link_1": "/collections/all",
+        "button_label_2": "LEATHER WALLETS",
+        "button_link_2": "/collections/wallets"
+      }
+    },
+    "collections": {
+      "type": "collection-list",
+      "settings": {
+        "title": "Signature Categories"
+      },
+      "blocks": {
+        "block-1": {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Leather Wallets",
+            "subtitle": "Vegetable-Tanned Calfskin"
+          }
+        },
+        "block-2": {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Luxury Footwear",
+            "subtitle": "Hand-Finished Loafers & Oxfords"
+          }
+        },
+        "block-3": {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Men's Tailored",
+            "subtitle": "Bespoke Waistcoats & Pret"
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3"
+      ]
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "subheading": "CURATED ATELIER SELECTION",
+        "title": "Signature Creations",
+        "description": "Each creation reflects meticulous tailoring, premium vegetable-tanned leathers, and restrained luxury.",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "view_all_label": "Explore Full Collection"
+      }
+    },
+    "philosophy": {
+      "type": "rich-text",
+      "settings": {
+        "subheading": "THE SJ PHILOSOPHY",
+        "title": "Crafted with Architectural Restraint",
+        "text": "<p>Every SJ Collections garment and leather artifact is fashioned by master artisans in Pakistan. Using world-renowned vegetable-tanned French and Italian hides alongside bespoke tropical wools, our atelier exists to preserve the art of timeless sartorial precision.</p>",
+        "button_label": "DISCOVER OUR STORY",
+        "button_link": "/pages/about"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "collections",
+    "featured",
+    "philosophy"
+  ]
+}

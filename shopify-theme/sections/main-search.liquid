@@ -1,0 +1,70 @@
+{% comment %}
+  Official Search Template
+{% endcomment %}
+
+{%- paginate search.results by 12 -%}
+  <section style="padding: 4rem 0 6rem;">
+    <div class="page-container">
+      
+      <!-- Search Form Header -->
+      <div style="text-align: center; max-width: 600px; margin: 0 auto 3.5rem;">
+        <span style="font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-warm-grey); display: block; margin-bottom: 0.5rem;">
+          CURATED CATALOG SEARCH
+        </span>
+        <h1 style="font-size: 2.5rem; font-weight: 400; color: var(--color-soft-black); margin-bottom: 1.5rem;">
+          Search Results
+        </h1>
+
+        <form action="/search" method="get" role="search" style="display: flex; gap: 0.5rem;">
+          <input
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="Search waistcoats, wallets, shoes..."
+            class="form-control"
+            style="background-color: var(--color-surface);"
+          >
+          <button type="submit" class="btn btn-primary" style="padding: 0 1.5rem;">
+            Search
+          </button>
+        </form>
+
+        {%- if search.performed -%}
+          <p style="font-size: 0.8125rem; color: var(--color-warm-grey); margin-top: 1.25rem;">
+            {{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }} found for "{{ search.terms }}"
+          </p>
+        {%- endif -%}
+      </div>
+
+      <!-- Results Grid -->
+      {%- if search.performed -%}
+        <div class="product-grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product_card_product: item %}
+            {%- endif -%}
+          {%- else -%}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--color-warm-grey);">
+              <p style="font-size: 1rem; margin-bottom: 1.5rem;">No creations matched your criteria.</p>
+              <a href="/collections/all" class="btn btn-secondary">
+                View All Creations
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {%- endif -%}
+
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Search Results",
+  "settings": []
+}
+{% endschema %}

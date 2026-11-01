@@ -1,0 +1,78 @@
+{
+  "general": {
+    "search": {
+      "search": "Search collections & creations...",
+      "submit": "Search",
+      "heading": "Search Results",
+      "results_with_count": {
+        "one": "{{ count }} creation found for \"{{ terms }}\"",
+        "other": "{{ count }} creations found for \"{{ terms }}\""
+      },
+      "no_results": "No creations matched your criteria. Explore our signature atelier collections."
+    },
+    "continue_shopping": "Continue Exploring",
+    "whatsapp_concierge": "WhatsApp Concierge",
+    "cod_notice": "Cash on Delivery Available Across Pakistan"
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart": "Shopping Bag",
+      "search": "Search"
+    },
+    "cart": {
+      "title": "Your Shopping Bag",
+      "empty": "Your shopping bag is currently empty.",
+      "subtotal": "Subtotal",
+      "shipping_at_checkout": "Complimentary Tracked Shipping in Pakistan",
+      "checkout": "Proceed to Cash on Delivery Checkout",
+      "note": "Special instructions for the atelier or courier",
+      "remove": "Remove item",
+      "quantity": "Quantity"
+    },
+    "collection": {
+      "filter_and_sort": "Filter & Refine",
+      "sort_by": "Curate By",
+      "products_count": {
+        "one": "{{ count }} creation",
+        "other": "{{ count }} creations"
+      },
+      "empty": "No items found in this collection."
+    },
+    "featured_collection": {
+      "view_all": "Explore All Creations"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Shopping Bag",
+      "order_via_whatsapp": "Order Directly via WhatsApp",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "sku": "SKU",
+      "vendor": "Maison",
+      "cash_on_delivery": "Cash on Delivery (COD) Guaranteed",
+      "shipping_policy_html": "Complimentary delivery in 2–4 business days across Pakistan."
+    }
+  },
+  "checkout": {
+    "cod": {
+      "heading": "Billing & Delivery Details",
+      "subheading": "Cash on Delivery (COD) · Order Confirmation via WhatsApp",
+      "name": "Full Name",
+      "phone": "Pakistani Mobile Number",
+      "phone_placeholder": "0300 1234567 or +92 333 3368420",
+      "email": "Email Address",
+      "address": "Complete Street Address",
+      "city": "City",
+      "province": "Province",
+      "postal_code": "Postal Code (Optional)",
+      "same_address": "Billing & Shipping Addresses Are Same",
+      "order_summary": "Order Summary",
+      "total_payable": "Total Payable (PKR)",
+      "submit_whatsapp": "CONFIRM ORDER VIA WHATSAPP",
+      "submitting": "PREPARING WHATSAPP ORDER..."
+    }
+  }
+}

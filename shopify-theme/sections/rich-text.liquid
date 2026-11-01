@@ -1,0 +1,75 @@
+{% comment %}
+  Atelier Craftsmanship & Rich Text Statement
+{% endcomment %}
+
+<section style="padding: 5rem 0; background-color: var(--color-ivory); text-align: center;">
+  <div class="page-container" style="max-width: 800px;">
+    {%- if section.settings.subheading != blank -%}
+      <span style="font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-accent-bronze); display: block; margin-bottom: 0.75rem;">
+        {{ section.settings.subheading }}
+      </span>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h2 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: var(--color-soft-black);">
+        {{ section.settings.title }}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <div style="font-size: 1rem; line-height: 1.8; color: #55534E; font-weight: 300;">
+        {{ section.settings.text }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <div style="margin-top: 2rem;">
+        <a href="{{ section.settings.button_link | default: '/pages/about' }}" class="btn btn-secondary">
+          {{ section.settings.button_label }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Editorial Subtitle",
+      "default": "THE SJ PHILOSOPHY"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Crafted with Architectural Restraint"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Statement Text",
+      "default": "<p>Every SJ Collections garment and leather artifact is fashioned by master artisans in Pakistan. Using world-renowned vegetable-tanned French and Italian hides alongside bespoke tropical wools, our atelier exists to preserve the art of timeless sartorial precision.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "DISCOVER OUR STORY"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich Text"
+    }
+  ]
+}
+{% endschema %}

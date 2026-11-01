@@ -1,0 +1,17 @@
+{% comment %}
+  Floating WhatsApp Concierge Button
+{% endcomment %}
+
+{%- if settings.enable_floating_whatsapp and settings.whatsapp_number != blank -%}
+  <a
+    href="https://wa.me/{{ settings.whatsapp_number | escape }}?text={{ 'Hello SJ Collections! I am inquiring from your official online store.' | url_encode }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="floating-whatsapp"
+    aria-label="Direct WhatsApp Concierge"
+    title="Chat with SJ Collections Concierge"
+  >
+    {% render 'icon-whatsapp' %}
+    <span style="font-family: var(--font-sans);">WhatsApp Concierge</span>
+  </a>
+{%- endif -%}

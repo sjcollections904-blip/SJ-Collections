@@ -1,0 +1,121 @@
+{% comment %}
+  Official Shopping Bag Page with Direct Cash on Delivery Integration
+{% endcomment %}
+
+<section style="padding: 3rem 0 5rem;">
+  <div class="page-container" style="max-width: 960px;">
+    
+    <div style="border-bottom: 1px solid var(--color-border-ivory); padding-bottom: 1.5rem; margin-bottom: 2.5rem; text-align: center;">
+      <span style="font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-warm-grey);">
+        ATELIER CHECKOUT
+      </span>
+      <h1 style="font-size: 2.5rem; font-weight: 400; color: var(--color-soft-black); margin-top: 0.5rem;">
+        Your Shopping Bag
+      </h1>
+      <p style="font-size: 0.8125rem; color: var(--color-warm-grey); margin-top: 0.25rem;">
+        Cash on Delivery (COD) · Order Confirmation via WhatsApp
+      </p>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <div style="background-color: var(--color-surface); border: 1px solid var(--color-border-ivory); margin-bottom: 3rem;">
+        
+        <!-- Items Header -->
+        <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--color-border-ivory); background-color: var(--color-tag-bg); display: flex; justify-content: space-between; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-soft-black);">
+          <span>Creation</span>
+          <span>Line Total</span>
+        </div>
+
+        <!-- Items Table -->
+        <div style="divide-y divide-[#E8E5DE];">
+          {%- for item in cart.items -%}
+            <div style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 1px solid var(--color-border-ivory);">
+              <div style="display: flex; gap: 1.25rem; align-items: center;">
+                <img
+                  src="{{ item.image | image_url: width: 160 }}"
+                  alt="{{ item.title | escape }}"
+                  style="width: 70px; height: 90px; object-fit: cover; background-color: #F0ECE1; border: 1px solid var(--color-border-ivory);"
+                  width="70"
+                  height="90"
+                >
+                <div>
+                  <h3 style="font-size: 1rem; font-family: var(--font-serif); margin-bottom: 0.25rem;">
+                    <a href="{{ item.url }}">{{ item.product_title }}</a>
+                  </h3>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <p style="font-size: 0.75rem; color: var(--color-warm-grey); margin-bottom: 0.25rem;">
+                      {{ item.variant_title }}
+                    </p>
+                  {%- endunless -%}
+                  <p style="font-size: 0.75rem; color: #555;">
+                    Qty: {{ item.quantity }} × {{ item.final_price | money }}
+                  </p>
+                  <a
+                    href="/cart/change?line={{ forloop.index }}&quantity=0"
+                    style="font-size: 0.6875rem; color: #B91C1C; text-decoration: underline; margin-top: 0.5rem; display: inline-block;"
+                  >
+                    Remove
+                  </a>
+                </div>
+              </div>
+
+              <div style="font-size: 1rem; font-weight: 700; color: var(--color-soft-black); text-align: right;">
+                {{ item.final_line_price | money }}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <!-- Bag Summary Subtotal -->
+        <div style="padding: 1.5rem; background-color: var(--color-ivory); display: flex; flex-direction: column; gap: 0.75rem; border-top: 1px solid var(--color-border-ivory); font-size: 0.875rem;">
+          <div style="display: flex; justify-content: space-between; color: var(--color-warm-grey);">
+            <span>Subtotal</span>
+            <span style="font-weight: 700; color: var(--color-soft-black);">{{ cart.total_price | money }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: var(--color-warm-grey);">
+            <span>Delivery Fee in Pakistan</span>
+            <span style="font-weight: 600; color: #15803D;">
+              {%- if settings.shipping_fee == 0 -%}
+                Complimentary Tracked Delivery
+              {%- else -%}
+                PKR {{ settings.shipping_fee }}
+              {%- endif -%}
+            </span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 700; padding-top: 0.75rem; border-top: 1px solid var(--color-border-ivory); color: var(--color-soft-black);">
+            <span>Estimated Total (COD)</span>
+            <span>
+              {%- assign shipping_in_cents = settings.shipping_fee | times: 100 -%}
+              {{ cart.total_price | plus: shipping_in_cents | money }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cash on Delivery Billing Section Anchor -->
+      <div id="checkout">
+        {% section 'cod-checkout' %}
+      </div>
+
+    {%- else -%}
+      <!-- Empty Bag -->
+      <div style="background-color: var(--color-surface); border: 1px solid var(--color-border-ivory); padding: 4rem 2rem; text-align: center;">
+        <h2 style="font-size: 1.75rem; margin-bottom: 1rem;">Your shopping bag is empty</h2>
+        <p style="font-size: 0.875rem; color: var(--color-warm-grey); max-width: 450px; margin: 0 auto 2rem;">
+          Explore our signature bespoke waistcoats, full-grain calfskin wallets, and handcrafted footwear.
+        </p>
+        <a href="/collections/all" class="btn btn-primary">
+          EXPLORE ATELIER CATALOG
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Cart",
+  "settings": []
+}
+{% endschema %}

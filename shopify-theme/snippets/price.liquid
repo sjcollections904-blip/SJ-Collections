@@ -1,0 +1,27 @@
+{% comment %}
+  Renders a luxury formatted price display with optional compare_at_price
+  Usage:
+  {% render 'price', product: product, use_variant: true %}
+{% endcomment %}
+
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign available = target.available | default: false
+  assign money_price = price | money
+-%}
+
+<div class="price-wrapper">
+  <span class="price price--current">{{ money_price }}</span>
+  {%- if compare_at_price > price -%}
+    <s class="price price--compare" style="margin-left: 0.5rem; color: var(--color-warm-grey); font-size: 0.8em;">
+      {{ compare_at_price | money }}
+    </s>
+  {%- endif -%}
+</div>

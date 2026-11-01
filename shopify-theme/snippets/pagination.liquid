@@ -1,0 +1,39 @@
+{% comment %}
+  Renders luxury pagination
+  Usage:
+  {% render 'pagination', paginate: paginate %}
+{% endcomment %}
+
+{%- if paginate.parts.size > 0 -%}
+  <div class="pagination-wrapper" style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 3rem; margin-bottom: 2rem;">
+    {%- if paginate.previous -%}
+      <a href="{{ paginate.previous.url }}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">
+        &larr; Previous
+      </a>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a href="{{ part.url }}" style="padding: 0.5rem 0.85rem; font-size: 0.8125rem; font-weight: 600; border: 1px solid var(--color-border-ivory); background-color: var(--color-surface);">
+          {{ part.title }}
+        </a>
+      {%- else -%}
+        {%- if part.title == paginate.current_page -%}
+          <span style="padding: 0.5rem 0.85rem; font-size: 0.8125rem; font-weight: 700; background-color: var(--color-soft-black); color: var(--color-ivory);">
+            {{ part.title }}
+          </span>
+        {%- else -%}
+          <span style="padding: 0.5rem 0.85rem; font-size: 0.8125rem; color: var(--color-warm-grey);">
+            {{ part.title }}
+          </span>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <a href="{{ paginate.next.url }}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">
+        Next &rarr;
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

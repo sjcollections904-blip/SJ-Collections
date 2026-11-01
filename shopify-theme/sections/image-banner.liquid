@@ -1,0 +1,132 @@
+{% comment %}
+  Official Editorial Hero Image Banner
+{% endcomment %}
+
+<section class="hero-banner" style="min-height: {{ section.settings.banner_height }}vh;">
+  {%- if section.settings.image != blank -%}
+    <img
+      src="{{ section.settings.image | image_url: width: 2000 }}"
+      alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+      class="hero-banner__bg"
+      style="opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};"
+      width="2000"
+      height="1200"
+      loading="eager"
+    >
+  {%- else -%}
+    <img
+      src="{{ 'hero_luxury_fashion_1793376931210.jpg' | asset_url }}"
+      alt="SJ Collections Luxury Fashion"
+      class="hero-banner__bg"
+      style="opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};"
+      width="2000"
+      height="1200"
+      loading="eager"
+    >
+  {%- endif -%}
+
+  <div class="hero-banner__content">
+    {%- if section.settings.tagline != blank -%}
+      <p class="hero-banner__tagline">{{ section.settings.tagline }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h1 class="hero-banner__title">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="hero-banner__subtext">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+      {%- if section.settings.button_label_1 != blank -%}
+        <a href="{{ section.settings.button_link_1 | default: '/collections/all' }}" class="btn btn-primary" style="background-color: #FFFFFF; color: #1A1A1A; border-color: #FFFFFF;">
+          {{ section.settings.button_label_1 }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank -%}
+        <a href="{{ section.settings.button_link_2 | default: '/collections/wallets' }}" class="btn btn-secondary" style="border-color: #FFFFFF; color: #FFFFFF;">
+          {{ section.settings.button_label_2 }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "range",
+      "id": "banner_height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 75,
+      "unit": "vh",
+      "label": "Banner Viewport Height"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "default": 65,
+      "unit": "%",
+      "label": "Image Brightness/Opacity"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline / Monogram Label",
+      "default": "MAISON DE COUTURE · PAKISTAN"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Timeless Elegance, Bespoke Restraint"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Subheading",
+      "default": "Discover refined tailored silhouettes, full-grain leather wallets, and handcrafted footwear designed for discerning lifestyles across Pakistan."
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Primary Button Text",
+      "default": "EXPLORE ALL CREATIONS"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary Button Text",
+      "default": "LEATHER WALLETS"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Banner"
+    }
+  ]
+}
+{% endschema %}

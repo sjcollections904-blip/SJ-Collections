@@ -1,0 +1,18 @@
+{
+  "current": {
+    "color_background": "#F9F8F4",
+    "color_surface": "#FFFFFF",
+    "color_text": "#1A1A1A",
+    "color_muted": "#8A8882",
+    "color_border": "#E8E5DE",
+    "color_accent": "#9C6F3B",
+    "logo_width": 190,
+    "whatsapp_number": "923333368420",
+    "whatsapp_label": "+92 333 3368420",
+    "whatsapp_order_prefix": "Hello SJ Collections! I would like to place a Cash on Delivery order.",
+    "enable_floating_whatsapp": true,
+    "shipping_fee": 0,
+    "cod_delivery_time": "2 to 4 business days nationwide via tracked courier service",
+    "social_instagram": "https://instagram.com/sjcollections"
+  }
+}

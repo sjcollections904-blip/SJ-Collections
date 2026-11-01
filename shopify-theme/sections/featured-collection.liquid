@@ -1,0 +1,113 @@
+{% comment %}
+  Curated Featured Collection Showcase
+{% endcomment %}
+
+<section style="padding: 4.5rem 0; background-color: var(--color-ivory);">
+  <div class="page-container">
+    <div style="text-align: center; max-width: 650px; margin: 0 auto 3rem;">
+      {%- if section.settings.subheading != blank -%}
+        <span style="font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-warm-grey); display: block; margin-bottom: 0.5rem;">
+          {{ section.settings.subheading }}
+        </span>
+      {%- endif -%}
+
+      <h2 style="font-size: 2.25rem; font-weight: 400; color: var(--color-soft-black);">
+        {{ section.settings.title | default: "Signature Creations" }}
+      </h2>
+
+      {%- if section.settings.description != blank -%}
+        <p style="font-size: 0.875rem; color: var(--color-warm-grey); margin-top: 0.75rem;">
+          {{ section.settings.description }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    {%- assign target_collection = collections[section.settings.collection] -%}
+
+    <div class="product-grid">
+      {%- if target_collection != blank and target_collection.products_count > 0 -%}
+        {%- for product in target_collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product_card_product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback to all products -->
+        {%- for product in collections.all.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product_card_product: product %}
+        {%- else -%}
+          <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--color-warm-grey);">
+            <p>Products added through Shopify Admin will automatically display here.</p>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all -%}
+      <div style="text-align: center; margin-top: 3.5rem;">
+        <a
+          href="{{ target_collection.url | default: '/collections/all' }}"
+          class="btn btn-secondary"
+          style="min-width: 220px;"
+        >
+          {{ section.settings.view_all_label | default: "Explore Full Collection" }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Editorial Subtitle",
+      "default": "CURATED ATELIER SELECTION"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Heading",
+      "default": "Signature Creations"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Editorial Description",
+      "default": "Each creation reflects meticulous tailoring, premium vegetable-tanned leathers, and restrained luxury."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "default": 8,
+      "label": "Products to Show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show View All Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All Button Text",
+      "default": "Explore Full Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

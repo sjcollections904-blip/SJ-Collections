@@ -1,0 +1,47 @@
+{% comment %}
+  Curated Related Creations
+{% endcomment %}
+
+<section style="padding: 4rem 0; background-color: var(--color-surface); border-top: 1px solid var(--color-border-ivory);">
+  <div class="page-container">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <span style="font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-warm-grey); display: block; margin-bottom: 0.5rem;">
+        COMPLETE YOUR ENSEMBLE
+      </span>
+      <h2 style="font-size: 2rem; font-weight: 400; color: var(--color-soft-black);">
+        {{ section.settings.heading | default: "Related Atelier Creations" }}
+      </h2>
+    </div>
+
+    <div class="product-grid">
+      {%- assign current_collection = product.collections.first -%}
+      {%- if current_collection != blank -%}
+        {%- for rec_product in current_collection.products limit: 4 -%}
+          {%- unless rec_product.id == product.id -%}
+            {% render 'product-card', product_card_product: rec_product %}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for rec_product in collections.all.products limit: 4 -%}
+          {%- unless rec_product.id == product.id -%}
+            {% render 'product-card', product_card_product: rec_product %}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Related Atelier Creations"
+    }
+  ]
+}
+{% endschema %}

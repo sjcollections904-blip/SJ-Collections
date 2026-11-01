@@ -1,0 +1,140 @@
+{% comment %}
+  Editorial Collection Category Blocks
+{% endcomment %}
+
+<section style="padding: 4.5rem 0; background-color: var(--color-surface); border-top: 1px solid var(--color-border-ivory); border-bottom: 1px solid var(--color-border-ivory);">
+  <div class="page-container">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+      <span style="font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-warm-grey); display: block; margin-bottom: 0.5rem;">
+        ATELIER CHAPTERS
+      </span>
+      <h2 style="font-size: 2.25rem; font-weight: 400; color: var(--color-soft-black);">
+        {{ section.settings.title | default: "Signature Categories" }}
+      </h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+      {%- for block in section.blocks -%}
+        {%- assign collection = collections[block.settings.collection] -%}
+        <div style="position: relative; overflow: hidden; aspect-ratio: 4 / 5; background-color: #F0ECE1; border: 1px solid var(--color-border-ivory);" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 800 }}"
+              alt="{{ block.settings.title | default: collection.title | escape }}"
+              style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);"
+              width="800"
+              height="1000"
+              loading="lazy"
+            >
+          {%- elsif collection.featured_image != blank -%}
+            <img
+              src="{{ collection.featured_image | image_url: width: 800 }}"
+              alt="{{ collection.title | escape }}"
+              style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);"
+              width="800"
+              height="1000"
+              loading="lazy"
+            >
+          {%- else -%}
+            <!-- Fallback Category Art from Assets -->
+            <img
+              src="{{ 'luxury_leather_bag_1793376933990.jpg' | asset_url }}"
+              alt="SJ Collections"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              width="800"
+              height="1000"
+              loading="lazy"
+            >
+          {%- endif -%}
+
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(20, 20, 20, 0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; color: #FFFFFF;">
+            <h3 style="font-size: 1.5rem; font-family: var(--font-serif); color: #FFFFFF; margin-bottom: 0.35rem;">
+              {{ block.settings.title | default: collection.title | default: "Atelier Collection" }}
+            </h3>
+            <p style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #D8D4CC; margin-bottom: 1rem;">
+              {{ block.settings.subtitle | default: "Explore Creations" }}
+            </p>
+            <a
+              href="{{ collection.url | default: '/collections/all' }}"
+              class="btn btn-secondary"
+              style="border-color: #FFFFFF; color: #FFFFFF; font-size: 0.6875rem; padding: 0.6rem 1.25rem; align-self: flex-start;"
+            >
+              Discover &rarr;
+            </a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection List",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Signature Categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "featured_collection",
+      "name": "Collection Item",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Cover Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title Override"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "View Catalog"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection List",
+      "blocks": [
+        {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Leather Wallets",
+            "subtitle": "Vegetable-Tanned Calfskin"
+          }
+        },
+        {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Luxury Footwear",
+            "subtitle": "Hand-Finished Loafers & Oxfords"
+          }
+        },
+        {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Men's Tailored",
+            "subtitle": "Bespoke Waistcoats & Pret"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

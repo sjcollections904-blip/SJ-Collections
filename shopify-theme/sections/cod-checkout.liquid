@@ -1,0 +1,282 @@
+{% comment %}
+  Official SJ Collections Cash on Delivery (COD) Billing & WhatsApp Order Form
+  Adapted from M Jafferjees Reference Layout with Pakistan Validation
+{% endcomment %}
+
+<div class="cod-checkout-wrapper">
+  
+  <!-- Guest Checkout Flow Indicator -->
+  <div class="cod-guest-pill">
+    GUEST CHECKOUT
+  </div>
+
+  <form
+    id="CodCheckoutForm"
+    data-whatsapp-number="{{ settings.whatsapp_number | default: '923333368420' }}"
+    data-shipping-fee="{{ settings.shipping_fee | default: 0 }}"
+    novalidate
+  >
+    <!-- Billing Address Heading -->
+    <div>
+      <h2 class="cod-heading">
+        Billing Address
+      </h2>
+      <div class="cod-divider"></div>
+    </div>
+
+    <!-- Billing Fields Grid -->
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+      
+      <!-- Row 1: Name & Telephone -->
+      <div class="form-grid form-grid-2">
+        <div class="form-group">
+          <label class="form-label" for="cod_name">
+            NAME <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="cod_name"
+            name="name"
+            required
+            placeholder="Full Name"
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cod_phone">
+            TELEPHONE <span class="required">*</span>
+          </label>
+          <input
+            type="tel"
+            id="cod_phone"
+            name="phone"
+            required
+            placeholder="03xxxxxxxxx or +92 333 3368420"
+            class="form-control"
+          >
+        </div>
+      </div>
+
+      <!-- Row 2: Email -->
+      <div class="form-group">
+        <label class="form-label" for="cod_email">
+          EMAIL <span class="required">*</span>
+        </label>
+        <input
+          type="email"
+          id="cod_email"
+          name="email"
+          required
+          placeholder="patron@domain.com"
+          class="form-control"
+        >
+      </div>
+
+      <!-- Row 3: Address (Multiline) -->
+      <div class="form-group">
+        <label class="form-label" for="cod_address">
+          DELIVERY ADDRESS <span class="required">*</span>
+        </label>
+        <textarea
+          id="cod_address"
+          name="address"
+          rows="3"
+          required
+          placeholder="House / Apartment number, Street name, Sector / Block"
+          class="form-control"
+          style="resize: vertical;"
+        ></textarea>
+      </div>
+
+      <!-- Row 4: Country & City -->
+      <div class="form-grid form-grid-2">
+        <div class="form-group">
+          <label class="form-label" for="cod_country">
+            COUNTRY <span class="required">*</span>
+          </label>
+          <select id="cod_country" name="country" class="form-control">
+            <option value="Pakistan" selected>Pakistan</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cod_city">
+            CITY <span class="required">*</span>
+          </label>
+          <select id="cod_city" name="city" class="form-control">
+            <option value="Karachi">Karachi</option>
+            <option value="Lahore">Lahore</option>
+            <option value="Islamabad">Islamabad</option>
+            <option value="Rawalpindi">Rawalpindi</option>
+            <option value="Faisalabad">Faisalabad</option>
+            <option value="Multan">Multan</option>
+            <option value="Peshawar">Peshawar</option>
+            <option value="Quetta">Quetta</option>
+            <option value="Sialkot">Sialkot</option>
+            <option value="Gujranwala">Gujranwala</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Other">Other Pakistani City</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 5: Province, Area, Postal Code -->
+      <div class="form-grid form-grid-3">
+        <div class="form-group">
+          <label class="form-label" for="cod_province">
+            PROVINCE / REGION <span class="required">*</span>
+          </label>
+          <select id="cod_province" name="province" class="form-control">
+            <option value="Sindh">Sindh</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
+            <option value="Balochistan">Balochistan</option>
+            <option value="Islamabad Capital Territory">Islamabad Capital Territory</option>
+            <option value="Azad Kashmir">Azad Kashmir</option>
+            <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cod_area">
+            AREA / LOCALITY
+          </label>
+          <input
+            type="text"
+            id="cod_area"
+            name="area"
+            placeholder="e.g. DHA, Clifton, Gulberg"
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cod_postal">
+            POSTAL CODE
+          </label>
+          <input
+            type="text"
+            id="cod_postal"
+            name="postal_code"
+            placeholder="e.g. 75500"
+            class="form-control"
+          >
+        </div>
+      </div>
+
+      <!-- Same as shipping checkbox -->
+      <div style="margin-top: 0.5rem;">
+        <label style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; font-weight: 500; cursor: pointer; user-select: none;">
+          <input
+            type="checkbox"
+            name="same_shipping"
+            data-same-shipping-toggle
+            checked
+            style="width: 1rem; height: 1rem; accent-color: var(--color-soft-black);"
+          >
+          <span>Billing &amp; Shipping Addresses Are Same</span>
+        </label>
+      </div>
+
+      <!-- Separate Shipping Section (revealed when unchecked) -->
+      <div data-separate-shipping-fields style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--color-border-ivory);">
+        <h3 class="cod-heading" style="font-size: 1.35rem; margin-bottom: 0.5rem;">
+          Recipient Delivery Address
+        </h3>
+        <div class="form-grid form-grid-2" style="margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label">RECIPIENT NAME</label>
+            <input type="text" name="shipping_name" placeholder="Recipient Name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">RECIPIENT TELEPHONE</label>
+            <input type="tel" name="shipping_phone" placeholder="03xxxxxxxxx" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">DELIVERY STREET ADDRESS</label>
+          <textarea name="shipping_address" rows="2" placeholder="Complete Street Address" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">DELIVERY CITY</label>
+          <input type="text" name="shipping_city" placeholder="City" class="form-control">
+        </div>
+      </div>
+
+      <!-- Order Notes -->
+      <div class="form-group" style="margin-top: 1rem;">
+        <label class="form-label" for="cod_notes">
+          ORDER NOTES / SPECIAL INSTRUCTIONS
+        </label>
+        <textarea
+          id="cod_notes"
+          name="order_notes"
+          rows="2"
+          placeholder="Any specific delivery instructions, preferred call time, or gift packaging notes"
+          class="form-control"
+        ></textarea>
+      </div>
+
+    </div>
+
+    <!-- Payment Method: Cash on Delivery ONLY -->
+    <div style="margin-bottom: 2rem; padding: 1.25rem; background-color: var(--color-tag-bg); border: 2px solid var(--color-soft-black);">
+      <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+        <input
+          type="radio"
+          name="payment_method"
+          value="Cash on Delivery (COD)"
+          checked
+          style="margin-top: 0.25rem; accent-color: var(--color-soft-black);"
+        >
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+            <strong style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-soft-black);">
+              Cash on Delivery (COD)
+            </strong>
+            <span style="background-color: var(--color-soft-black); color: #FFF; font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.45rem;">
+              Standard
+            </span>
+          </div>
+          <p style="font-size: 0.75rem; color: #555; line-height: 1.5;">
+            Pay with cash when your parcel is delivered to your doorstep. You will receive an immediate confirmation on WhatsApp from our concierge (+92 333 3368420).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error container -->
+    <div
+      data-cod-error
+      style="display: none; padding: 0.9rem 1.25rem; background-color: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; font-size: 0.75rem; margin-bottom: 1.5rem;"
+    ></div>
+
+    <!-- Final WhatsApp Submission Button -->
+    <div style="text-align: center;">
+      <button
+        type="submit"
+        data-cod-submit
+        class="btn btn-primary"
+        style="width: 100%; padding: 1.2rem; font-size: 0.875rem; background-color: var(--color-soft-black); display: flex; align-items: center; justify-content: center; gap: 0.6rem;"
+      >
+        <span style="color: #25D366; display: flex; align-items: center;">
+          {% render 'icon-whatsapp' %}
+        </span>
+        <span>CONFIRM ORDER VIA WHATSAPP (COD)</span>
+      </button>
+
+      <p style="font-size: 0.6875rem; color: var(--color-warm-grey); margin-top: 0.75rem; line-height: 1.5; max-width: 550px; margin-left: auto; margin-right: auto;">
+        Clicking will prepare your Cash on Delivery parcel and open the official SJ Collections WhatsApp concierge (+92 333 3368420). Please press <strong>Send</strong> in WhatsApp to finalize your dispatch.
+      </p>
+    </div>
+
+  </form>
+</div>
+
+{% schema %}
+{
+  "name": "Cash on Delivery Form",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,165 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "SJ Collections Luxury Edition",
+    "theme_version": "1.0.0",
+    "theme_author": "SJ Collections",
+    "theme_documentation_url": "https://sjcollections.pk",
+    "theme_support_url": "https://wa.me/923333368420"
+  },
+  {
+    "name": "Branding & Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Custom Brand Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 100,
+        "max": 320,
+        "step": 10,
+        "default": 190,
+        "unit": "px",
+        "label": "Custom logo width"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image"
+      }
+    ]
+  },
+  {
+    "name": "Brand Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Warm Ivory Background",
+        "default": "#F9F8F4"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Card & Input Surface",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Soft Black Text",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted Warm Grey",
+        "default": "#8A8882"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Light Ivory Border",
+        "default": "#E8E5DE"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Editorial Accent Bronze",
+        "default": "#9C6F3B"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Editorial Headings Font",
+        "default": "playfair_display_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body & UI Font",
+        "default": "assistant_n4"
+      }
+    ]
+  },
+  {
+    "name": "WhatsApp & COD Ordering",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Official WhatsApp Concierge"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Store WhatsApp Number",
+        "default": "923333368420",
+        "info": "Enter digits only with country code (e.g. 923333368420 for Pakistan)"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_label",
+        "label": "Concierge Display Phone",
+        "default": "+92 333 3368420"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_order_prefix",
+        "label": "Order Message Salutation",
+        "default": "Hello SJ Collections! I would like to place a Cash on Delivery order."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_floating_whatsapp",
+        "label": "Show Floating WhatsApp Concierge Widget",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Shipping & Cash on Delivery Fees (PKR)"
+      },
+      {
+        "type": "number",
+        "id": "shipping_fee",
+        "label": "Standard Delivery Fee (PKR)",
+        "default": 0,
+        "info": "Set to 0 for Complimentary Delivery across Pakistan"
+      },
+      {
+        "type": "text",
+        "id": "cod_delivery_time",
+        "label": "Estimated Delivery Window",
+        "default": "2 to 4 business days nationwide via tracked courier service"
+      }
+    ]
+  },
+  {
+    "name": "Social Media Links",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL",
+        "default": "https://instagram.com/sjcollections"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      }
+    ]
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "collections": {
+      "type": "collection-list",
+      "settings": {
+        "title": "All Atelier Collections"
+      },
+      "blocks": {
+        "b1": {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Leather Wallets",
+            "subtitle": "Vegetable-Tanned French & Italian Calfskin"
+          }
+        },
+        "b2": {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Handcrafted Leather Footwear",
+            "subtitle": "Bespoke Loafers & Oxfords"
+          }
+        },
+        "b3": {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Men's Tailored Collection",
+            "subtitle": "Waistcoats & Sartorial Elegance"
+          }
+        },
+        "b4": {
+          "type": "featured_collection",
+          "settings": {
+            "title": "Women's Couture Pret",
+            "subtitle": "Raw Silk & Organza Ensembles"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    }
+  },
+  "order": [
+    "collections"
+  ]
+}

@@ -1,0 +1,240 @@
+{% comment %}
+  Official SJ Collections Main Product Template
+{% endcomment %}
+
+<section class="main-product" style="padding: 3rem 0 5rem;">
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <div style="font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-warm-grey); margin-bottom: 2rem;">
+      <a href="/" style="color: inherit;">Home</a>
+      <span style="margin: 0 0.5rem;">/</span>
+      <a href="/collections/all" style="color: inherit;">Collections</a>
+      <span style="margin: 0 0.5rem;">/</span>
+      <span style="color: var(--color-soft-black);">{{ product.title }}</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start;" class="product-layout-grid">
+      <style>
+        @media (min-width: 1024px) {
+          .product-layout-grid {
+            grid-template-columns: 1.15fr 1fr !important;
+            gap: 4.5rem !important;
+          }
+        }
+      </style>
+
+      <!-- Media Gallery -->
+      <div class="product-gallery">
+        <div style="aspect-ratio: 3 / 4; background-color: #F0ECE1; border: 1px solid var(--color-border-ivory); overflow: hidden; margin-bottom: 1rem;">
+          <img
+            id="ProductMainImage"
+            src="{{ product.featured_image | image_url: width: 1000 }}"
+            alt="{{ product.featured_image.alt | default: product.title | escape }}"
+            style="width: 100%; height: 100%; object-fit: cover;"
+            width="1000"
+            height="1333"
+            loading="eager"
+          >
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
+            {%- for image in product.images -%}
+              <button
+                type="button"
+                onclick="document.getElementById('ProductMainImage').src = '{{ image | image_url: width: 1000 }}'"
+                style="aspect-ratio: 1; border: 1px solid var(--color-border-ivory); background-color: #F0ECE1; padding: 0; cursor: pointer; overflow: hidden;"
+              >
+                <img
+                  src="{{ image | image_url: width: 250 }}"
+                  alt="{{ image.alt | default: product.title | escape }}"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                  width="250"
+                  height="250"
+                  loading="lazy"
+                >
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Product Information -->
+      <div class="product-info" style="display: flex; flex-direction: column;">
+        <span style="font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-warm-grey); margin-bottom: 0.5rem;">
+          {{ product.type | default: product.vendor | default: 'SJ Atelier Collection' }}
+        </span>
+
+        <h1 style="font-size: 2.25rem; font-weight: 400; line-height: 1.2; margin-bottom: 1rem; color: var(--color-soft-black);">
+          {{ product.title }}
+        </h1>
+
+        <!-- Price Display -->
+        <div style="display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 700;">
+          <span data-product-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+          {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+            <s data-product-compare-price style="font-size: 0.95rem; color: var(--color-warm-grey);">
+              {{ product.selected_or_first_available_variant.compare_at_price | money }}
+            </s>
+          {%- endif -%}
+        </div>
+
+        <!-- Cash on Delivery Badge -->
+        <div style="display: flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1rem; background-color: var(--color-tag-bg); border: 1px solid var(--color-border-dark); margin-bottom: 1.75rem; font-size: 0.75rem; color: var(--color-soft-black);">
+          <span style="width: 8px; height: 8px; border-radius: 9999px; background-color: var(--color-soft-black);"></span>
+          <span style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Cash on Delivery Available</span>
+          <span style="color: var(--color-warm-grey); margin-left: auto;">2–4 Days Nationwide</span>
+        </div>
+
+        <!-- Description -->
+        <div style="font-size: 0.875rem; line-height: 1.7; color: #55534E; margin-bottom: 2rem; border-bottom: 1px solid var(--color-border-ivory); padding-bottom: 1.75rem;">
+          {{ product.description }}
+        </div>
+
+        <!-- Add to Cart & Variant Form -->
+        {%- form 'product', product, id: 'ProductForm', data-product-form: '' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          <!-- Variant Options -->
+          {%- unless product.has_only_default_variant -%}
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.75rem;">
+              {%- for option in product.options_with_values -%}
+                <div>
+                  <label style="display: block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-soft-black); margin-bottom: 0.5rem;">
+                    {{ option.name }}: <span style="font-weight: 400; color: var(--color-warm-grey);">{{ option.selected_value }}</span>
+                  </label>
+
+                  <select
+                    data-single-option-selector
+                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border-dark); background-color: var(--color-surface); font-size: 0.8125rem;"
+                  >
+                    {%- for value in option.values -%}
+                      <option
+                        value="{{ value | escape }}"
+                        {% if option.selected_value == value %}selected="selected"{% endif %}
+                      >
+                        {{ value }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <!-- Quantity Stepper -->
+          <div style="margin-bottom: 1.75rem;">
+            <label style="display: block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-soft-black); margin-bottom: 0.5rem;">
+              Quantity
+            </label>
+            <div style="display: inline-flex; align-items: center; border: 1px solid var(--color-border-dark); background-color: var(--color-surface);">
+              <button
+                type="button"
+                onclick="const q = this.nextElementSibling; if(parseInt(q.value) > 1) q.value = parseInt(q.value) - 1;"
+                style="padding: 0.6rem 1rem; background: none; border: none; cursor: pointer; font-size: 1rem;"
+              >-</button>
+              <input
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+                style="width: 50px; text-align: center; border: none; font-size: 0.875rem; font-weight: 600; outline: none; background: transparent;"
+              >
+              <button
+                type="button"
+                onclick="const q = this.previousElementSibling; q.value = parseInt(q.value) + 1;"
+                style="padding: 0.6rem 1rem; background: none; border: none; cursor: pointer; font-size: 1rem;"
+              >+</button>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
+            <button
+              type="submit"
+              name="add"
+              class="btn btn-primary"
+              style="width: 100%; padding: 1rem;"
+              {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+            >
+              {%- if product.selected_or_first_available_variant.available -%}
+                ADD TO SHOPPING BAG
+              {%- else -%}
+                SOLD OUT
+              {%- endif -%}
+            </button>
+
+            <!-- Direct WhatsApp Order for this creation -->
+            {%- if settings.whatsapp_number != blank -%}
+              <button
+                type="button"
+                onclick="window.orderProductViaWhatsApp()"
+                class="btn btn-whatsapp"
+                style="width: 100%; padding: 1rem;"
+              >
+                {% render 'icon-whatsapp' %}
+                <span>ORDER DIRECTLY VIA WHATSAPP (COD)</span>
+              </button>
+
+              <script>
+                window.orderProductViaWhatsApp = function() {
+                  const form = document.getElementById('ProductForm');
+                  const variantId = form.querySelector('input[name="id"]').value;
+                  const qty = form.querySelector('input[name="quantity"]').value;
+                  const title = {{ product.title | json }};
+                  const price = {{ product.selected_or_first_available_variant.price | money | json }};
+                  
+                  const msg = `Hello SJ Collections! I would like to place an immediate Cash on Delivery order for:
+
+• ${title}
+Quantity: ${qty}
+Price: ${price}
+Delivery: Across Pakistan (COD)
+
+Please confirm my order and courier details. Thank you!`;
+                  
+                  const url = `https://wa.me/{{ settings.whatsapp_number }}?text=${encodeURIComponent(msg)}`;
+                  window.open(url, '_blank', 'noopener,noreferrer');
+                };
+              </script>
+            {%- endif -%}
+          </div>
+
+          <!-- Variants JSON Data for theme.js -->
+          <script type="application/json" data-product-variants-json>
+            {{ product.variants | json }}
+          </script>
+        {%- endform -%}
+
+        <!-- Atelier Quality Accordion -->
+        <div style="border-top: 1px solid var(--color-border-ivory); margin-top: 1rem; font-size: 0.8125rem;">
+          <details style="padding: 1rem 0; border-bottom: 1px solid var(--color-border-ivory); cursor: pointer;">
+            <summary style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-soft-black);">
+              Materials &amp; Craftsmanship
+            </summary>
+            <p style="padding-top: 0.75rem; color: #666; line-height: 1.6;">
+              Meticulously handcrafted in Pakistan using certified European vegetable-tanned hides and imported luxury suiting fabrics. Edges are hand-creased and sealed with beeswax for lifetime resilience.
+            </p>
+          </details>
+
+          <details style="padding: 1rem 0; border-bottom: 1px solid var(--color-border-ivory); cursor: pointer;">
+            <summary style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-soft-black);">
+              Nationwide Delivery &amp; Cash on Delivery
+            </summary>
+            <p style="padding-top: 0.75rem; color: #666; line-height: 1.6;">
+              Dispatched with tracked white-glove courier service. Inspect your creation upon arrival and pay in cash to the delivery associate. Delivery takes 2 to 4 business days across all cities in Pakistan.
+            </p>
+          </details>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": []
+}
+{% endschema %}

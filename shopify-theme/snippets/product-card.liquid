@@ -1,0 +1,65 @@
+{% comment %}
+  Renders a luxury product card
+  Usage:
+  {% render 'product-card', product_card_product: product %}
+{% endcomment %}
+
+{%- assign product = product_card_product -%}
+
+<div class="product-card">
+  <div class="product-card__media">
+    <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title }}">
+      {%- if product.featured_media -%}
+        <img
+          src="{{ product.featured_media | image_url: width: 600 }}"
+          alt="{{ product.featured_media.alt | default: product.title | escape }}"
+          loading="lazy"
+          class="product-card__img"
+          width="600"
+          height="800"
+        >
+      {%- else -%}
+        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #F0ECE1; color: var(--color-warm-grey); font-size: 0.75rem;">
+          No Image Available
+        </div>
+      {%- endif -%}
+    </a>
+
+    {%- if product.available == false -%}
+      <span class="product-card__badge" style="background-color: #4A4A4A;">Sold Out</span>
+    {%- elsif product.compare_at_price > product.price -%}
+      <span class="product-card__badge" style="background-color: var(--color-accent-bronze);">Privilege Sale</span>
+    {%- elsif product.tags contains 'bestseller' or product.tags contains 'Bestseller' -%}
+      <span class="product-card__badge">Bestseller</span>
+    {%- elsif product.tags contains 'new' or product.tags contains 'New' -%}
+      <span class="product-card__badge">New Creation</span>
+    {%- endif -%}
+  </div>
+
+  <div class="product-card__details">
+    <span class="product-card__category">
+      {{ product.type | default: product.vendor | default: 'SJ Atelier' }}
+    </span>
+
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    <div class="product-card__price-row">
+      {% render 'price', product: product, use_variant: false %}
+    </div>
+
+    {%- if product.available -%}
+      <form method="post" action="/cart/add" style="margin-top: 0.85rem;">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button
+          type="submit"
+          class="btn btn-secondary"
+          style="width: 100%; padding: 0.6rem 0.5rem; font-size: 0.6875rem;"
+        >
+          Quick Add
+        </button>
+      </form>
+    {%- endif -%}
+  </div>
+</div>
