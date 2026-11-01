@@ -1,0 +1,6 @@
+{
+  "name": "SJ Collections | Luxury Fashion & Leather Goods Pakistan",
+  "description": "SJ Collections — Discover exquisite luxury menswear, womenswear, handcrafted leather footwear, artisanal bags, and accessories in Pakistan. Cash on Delivery available nationwide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
