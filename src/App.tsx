@@ -6,7 +6,6 @@ import { AuthProvider } from './context/AuthContext';
 
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { CartDrawer } from './components/CartDrawer';
 import { SearchModal } from './components/SearchModal';
 import { QuickViewModal } from './components/QuickViewModal';
@@ -237,9 +236,6 @@ function MainApp() {
 
       {/* Global Luxury Footer */}
       <Footer onNavigate={handleNavigate} />
-
-      {/* Persistent Floating WhatsApp Concierge */}
-      <FloatingWhatsApp />
 
       {/* Persistent Slide-out Shopping Bag Drawer */}
       <CartDrawer
