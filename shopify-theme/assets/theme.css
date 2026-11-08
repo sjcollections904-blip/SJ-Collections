@@ -163,17 +163,17 @@ button, input, select, textarea {
   transition: var(--transition-smooth);
 }
 
-.site-header__wrapper {
+.site-header__top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4.5rem;
+  height: 4.25rem;
   position: relative;
 }
 
 @media (min-width: 1024px) {
-  .site-header__wrapper {
-    height: 5.5rem;
+  .site-header__top-row {
+    height: 5.25rem;
   }
 }
 
@@ -183,26 +183,63 @@ button, input, select, textarea {
   flex: 1 1 0%;
 }
 
-.site-nav {
-  display: none;
-  gap: 1.75rem;
+/* Horizontal Sub-Navigation Bar Directly Below Logo */
+.site-header__subnav {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  padding: 0.65rem 1rem 0.95rem;
+  border-top: 1px solid rgba(232, 229, 222, 0.7);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
 }
-@media (min-width: 1024px) {
-  .site-nav {
-    display: flex;
+
+.site-header__subnav::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .site-header__subnav {
+    gap: 2.75rem;
+    padding: 0.75rem 1.5rem 1.05rem;
   }
 }
 
-.site-nav__link {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-warm-grey);
+@media (min-width: 1024px) {
+  .site-header__subnav {
+    gap: 3.25rem;
+  }
 }
-.site-nav__link:hover, .site-nav__link--active {
+
+.site-header__subnav-link {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 450;
+  color: #78756E;
+  letter-spacing: 0.025em;
+  text-decoration: none;
+  position: relative;
+  padding: 0.2rem 0;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.site-header__subnav-link:hover,
+.site-header__subnav-link--active {
   color: var(--color-soft-black);
+}
+
+.site-header__subnav-link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background-color: var(--color-soft-black);
 }
 
 .site-header__logo-container {

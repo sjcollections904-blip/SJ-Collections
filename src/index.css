@@ -51,3 +51,12 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #8A8882;
 }
+
+/* Hide scrollbar utility for clean horizontal navigation scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

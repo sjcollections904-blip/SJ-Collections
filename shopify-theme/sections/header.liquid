@@ -1,35 +1,18 @@
 {% comment %}
-  Official SJ Collections Centered Header
+  Official SJ Collections Centered Header with Horizontal Collection Navigation
 {% endcomment %}
 
 <header class="site-header">
   <div class="page-container">
-    <div class="site-header__wrapper">
-      <!-- Left: Mobile Menu Toggle & Desktop Navigation -->
+    <!-- Top Row: Mobile Toggle, Centered Logo, Utility Icons -->
+    <div class="site-header__top-row">
+      <!-- Left: Mobile Menu Toggle -->
       <div class="site-header__left">
         <button type="button" class="mobile-menu-toggle" data-mobile-menu-toggle aria-label="Open Navigation Menu">
           <span></span>
           <span></span>
           <span></span>
         </button>
-
-        <nav class="site-nav" role="navigation">
-          {%- for link in linklists[section.settings.menu].links -%}
-            <a
-              href="{{ link.url }}"
-              class="site-nav__link{% if link.active %} site-nav__link--active{% endif %}"
-            >
-              {{ link.title }}
-            </a>
-          {%- else -%}
-            <!-- Default Luxury Fallback Links if no menu created in Shopify admin yet -->
-            <a href="/collections/all" class="site-nav__link">Catalog</a>
-            <a href="/collections/men" class="site-nav__link">Men</a>
-            <a href="/collections/women" class="site-nav__link">Women</a>
-            <a href="/collections/wallets" class="site-nav__link">Wallets</a>
-            <a href="/collections/footwear" class="site-nav__link">Footwear</a>
-          {%- endfor -%}
-        </nav>
       </div>
 
       <!-- Center: Official SJ Collections Logo (Strictly Centered) -->
@@ -78,6 +61,28 @@
         </button>
       </div>
     </div>
+
+    <!-- Navigation Section Directly Below the SJ Collections Logo -->
+    <nav class="site-header__subnav" role="navigation" aria-label="Primary Collections Navigation">
+      {%- assign custom_menu = linklists[section.settings.menu] -%}
+      {%- if section.settings.menu != blank and custom_menu.links.size > 0 -%}
+        {%- for link in custom_menu.links -%}
+          <a
+            href="{{ link.url }}"
+            class="site-header__subnav-link{% if link.active %} site-header__subnav-link--active{% endif %}"
+          >
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="/collections/all" class="site-header__subnav-link{% if request.path == '/collections/all' %} site-header__subnav-link--active{% endif %}">Collections</a>
+        <a href="/collections/men" class="site-header__subnav-link{% if request.path == '/collections/men' %} site-header__subnav-link--active{% endif %}">Men</a>
+        <a href="/collections/women" class="site-header__subnav-link{% if request.path == '/collections/women' %} site-header__subnav-link--active{% endif %}">Women</a>
+        <a href="/collections/footwear" class="site-header__subnav-link{% if request.path == '/collections/footwear' %} site-header__subnav-link--active{% endif %}">Footwear</a>
+        <a href="/collections/wallets" class="site-header__subnav-link{% if request.path == '/collections/wallets' %} site-header__subnav-link--active{% endif %}">Wallets</a>
+        <a href="/collections/bags" class="site-header__subnav-link{% if request.path == '/collections/bags' %} site-header__subnav-link--active{% endif %}">Bags</a>
+      {%- endif -%}
+    </nav>
   </div>
 </header>
 
@@ -95,20 +100,24 @@
     </div>
 
     <nav style="display: flex; flex-direction: column; gap: 1.25rem;">
-      {%- for link in linklists[section.settings.menu].links -%}
-        <a
-          href="{{ link.url }}"
-          style="font-size: 0.95rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-soft-black);"
-        >
-          {{ link.title }}
-        </a>
+      {%- assign custom_menu = linklists[section.settings.menu] -%}
+      {%- if section.settings.menu != blank and custom_menu.links.size > 0 -%}
+        {%- for link in custom_menu.links -%}
+          <a
+            href="{{ link.url }}"
+            style="font-size: 0.95rem; font-weight: 500; letter-spacing: 0.05em; color: var(--color-soft-black);"
+          >
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
       {%- else -%}
-        <a href="/collections/all" style="font-size: 0.95rem; font-weight: 600; text-transform: uppercase;">All Creations</a>
-        <a href="/collections/men" style="font-size: 0.95rem; font-weight: 600; text-transform: uppercase;">Men's Collection</a>
-        <a href="/collections/women" style="font-size: 0.95rem; font-weight: 600; text-transform: uppercase;">Women's Collection</a>
-        <a href="/collections/wallets" style="font-size: 0.95rem; font-weight: 600; text-transform: uppercase;">Leather Wallets</a>
-        <a href="/collections/footwear" style="font-size: 0.95rem; font-weight: 600; text-transform: uppercase;">Luxury Footwear</a>
-      {%- endfor -%}
+        <a href="/collections/all" style="font-size: 0.95rem; font-weight: 500; color: var(--color-soft-black);">Collections</a>
+        <a href="/collections/men" style="font-size: 0.95rem; font-weight: 500; color: var(--color-soft-black);">Men</a>
+        <a href="/collections/women" style="font-size: 0.95rem; font-weight: 500; color: var(--color-soft-black);">Women</a>
+        <a href="/collections/footwear" style="font-size: 0.95rem; font-weight: 500; color: var(--color-soft-black);">Footwear</a>
+        <a href="/collections/wallets" style="font-size: 0.95rem; font-weight: 500; color: var(--color-soft-black);">Wallets</a>
+        <a href="/collections/bags" style="font-size: 0.95rem; font-weight: 500; color: var(--color-soft-black);">Bags</a>
+      {%- endif -%}
     </nav>
 
     <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--color-border-ivory);">
@@ -153,8 +162,8 @@
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Navigation Menu",
-      "default": "main-menu"
+      "label": "Navigation Menu (Optional Custom Menu)",
+      "info": "Select a menu to override the default primary collection links."
     }
   ]
 }

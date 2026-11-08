@@ -227,6 +227,7 @@ function MainApp() {
       {/* Global Navigation Header */}
       <Header
         currentPage={currentPage}
+        currentCategory={routeParams.category}
         onNavigate={handleNavigate}
         onSearchOpen={() => setIsSearchOpen(true)}
       />

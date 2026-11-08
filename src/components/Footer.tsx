@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Check, ShieldCheck, Truck, RefreshCw, MessageSquare } from 'lucide-react';
+import { ArrowRight, Check, ShieldCheck, Truck, RefreshCw, MessageSquare, Download } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: string, params?: Record<string, string>) => void;
@@ -214,6 +214,28 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <span className="text-[#666]">Prices in PKR (₨)</span>
+              </li>
+              <li className="pt-2">
+                <a
+                  href="/sj-collections-shopify-theme.zip"
+                  download="sj-collections-shopify-theme.zip"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 text-[#C4A47C]"
+                  title="Download ready-to-upload Shopify OS 2.0 Theme"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download Shopify Theme (.zip)</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/sj-collections-project.zip"
+                  download="sj-collections-project.zip"
+                  className="hover:text-[#8A8882] transition-colors inline-flex items-center gap-1.5 text-[#666]"
+                  title="Download complete project archive"
+                >
+                  <Download className="w-3 h-3" />
+                  <span>Full Project Archive (.zip)</span>
+                </a>
               </li>
             </ul>
           </div>
