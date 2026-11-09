@@ -1,0 +1,36 @@
+<div class="page-container py-12">
+  <div class="max-w-4xl mx-auto text-center mb-10">
+    <p class="text-xs font-semibold tracking-widest uppercase text-[#8A8882] mb-2">Atelier Gazette</p>
+    <h1 class="font-serif-luxury text-3xl sm:text-4xl text-[#1A1A1A]">{{ blog.title }}</h1>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {% for article in blog.articles %}
+      <article class="border border-[#E8E5DE] bg-white p-6">
+        {% if article.image %}
+          <div class="aspect-[16/10] overflow-hidden mb-4">
+            <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | default: article.title }}" class="w-full h-full object-cover">
+          </div>
+        {% endif %}
+        <p class="text-xs text-[#8A8882] uppercase tracking-wider mb-1">{{ article.published_at | date: "%B %d, %Y" }}</p>
+        <h2 class="font-serif-luxury text-xl mb-2">
+          <a href="{{ article.url }}" class="text-[#1A1A1A] hover:text-[#9C6F3B] transition-colors">{{ article.title }}</a>
+        </h2>
+        <div class="text-sm text-[#78756E] leading-relaxed mb-4">
+          {{ article.excerpt_or_content | strip_html | truncatewords: 30 }}
+        </div>
+        <a href="{{ article.url }}" class="text-xs uppercase tracking-widest font-semibold text-[#1A1A1A] underline underline-offset-4">
+          Read Story &rarr;
+        </a>
+      </article>
+    {% else %}
+      <p class="text-center text-[#8A8882] col-span-2 py-12">No stories published yet. Stay tuned to the Atelier Gazette.</p>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog Posts",
+  "settings": []
+}
+{% endschema %}
